@@ -10,7 +10,6 @@ namespace Dio.Bank
 {
     class Program
     {
-        static List<Conta> listContas = new List<Conta>();
         static void Main(string[] args)
         {
             var serviceCollection = new ServiceCollection();
@@ -62,7 +61,7 @@ namespace Dio.Bank
             Console.Write("Digite o valor a ser depositado: ");
             double valorDeposito = double.Parse(Console.ReadLine());
 
-            acoesContaService.Depositar(listContas, indiceConta, valorDeposito);
+            acoesContaService.Depositar(indiceConta, valorDeposito);
         }
 
         private static void Sacar(IAcoesContaService acoesContaService)
@@ -73,7 +72,7 @@ namespace Dio.Bank
             Console.Write("Digite o valor a ser sacado: ");
             double valorSaque = double.Parse(Console.ReadLine());
 
-            acoesContaService.Sacar(listContas, indiceConta, valorSaque);
+            acoesContaService.Sacar(indiceConta, valorSaque);
         }
 
         private static void Transferir(IAcoesContaService acoesContaService)
@@ -87,7 +86,7 @@ namespace Dio.Bank
             Console.Write("Digite o valor a ser transferido: ");
             double valorTransferencia = double.Parse(Console.ReadLine());
             
-            acoesContaService.Transferir(listContas, indiceContaOrigem, indiceContaDestino, valorTransferencia);
+            acoesContaService.Transferir(indiceContaOrigem, indiceContaDestino, valorTransferencia);
         }
 
         private static void InserirConta(IAcoesContaService acoesContaService)
@@ -112,20 +111,27 @@ namespace Dio.Bank
             Console.Write("Digite o crédito: ");
             double entradaCredito = double.Parse(Console.ReadLine());
 
-            acoesContaService.InserirConta(listContas, entradaTipoConta, entradaNome, entradaSaldo, entradaCredito);
+            acoesContaService.InserirConta(entradaTipoConta, entradaNome, entradaSaldo, entradaCredito);
         }
 
         private static void ListarContas(IAcoesContaService acoesContaService)
         {
             Console.WriteLine("Listar contas");
 
+            List<Conta> listContas = acoesContaService.ListarContas();
             if (listContas.Count == 0)
             {
                 Console.WriteLine("Nenhuma conta cadastrada.");
                 Console.WriteLine();
                 return;
             }
-            acoesContaService.ListarContas(listContas);
+
+            for (int i = 0; i < listContas.Count; i++)
+            {
+                Conta conta = listContas[i];
+                Console.Write("#{0} - ", i);
+                Console.WriteLine(conta);
+            }
         }
 
         private static string ObterOpcaoUsuario()
