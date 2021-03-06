@@ -1,0 +1,29 @@
+body{
+    height: 95vh;
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:#212020;
+    color:#fff;
+}
+
+#time{
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    font-size: 1.5rem;
+}
+
+#gameover{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    visibility: hidden;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
